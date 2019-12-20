@@ -24,6 +24,9 @@ namespace Todo.Pages.TodoList
         [BindProperty (SupportsGet = true)]
         public string SearchContent { get; set; }
 
+        [BindProperty (SupportsGet = true)]
+        public string TodoIsDone { get; set; }
+
         public async Task OnGetAsync()
         {
             var TodoList = from t in _context.TodoItems
@@ -31,7 +34,13 @@ namespace Todo.Pages.TodoList
 
             if(!string.IsNullOrEmpty(SearchContent))
             {
-                TodoList = TodoList.Where(s => s.Content.Contains(SearchContent));
+                TodoList = TodoList.Where(t => t.Content.Contains(SearchContent));
+            }
+
+            if(!string.IsNullOrEmpty(TodoIsDone))
+            {
+                bool FilterStatus =  TodoIsDone == "done";
+                TodoList = TodoList.Where(t => t.IsDone == FilterStatus);
             }
 
             TodoItem = await TodoList.ToListAsync();

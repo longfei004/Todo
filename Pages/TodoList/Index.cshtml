@@ -13,6 +13,11 @@
 
 <form>
     <p>
+        <select asp-for="TodoIsDone">
+            <option value="">All</option>
+            <option value="done">Done</option>
+            <option value="notDone">NotDone</option>
+        </select>
         Content: <input type="text" asp-for="SearchContent" />
         <input type="submit" value="Search" />
     </p>
