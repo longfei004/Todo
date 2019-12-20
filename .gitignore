@@ -50,9 +50,7 @@ Thumbs.db
 ehthumbs.db
 ehthumbs_vista.db
 
-MvcMovie.db
-MvcMovie.db-shm
-MvcMovie.db-wal
+MvcTodo.db
 
 # Dump file
 *.stackdump
