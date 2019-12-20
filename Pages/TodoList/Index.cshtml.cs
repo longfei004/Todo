@@ -21,9 +21,20 @@ namespace Todo.Pages.TodoList
 
         public IList<TodoItem> TodoItem { get;set; }
 
+        [BindProperty (SupportsGet = true)]
+        public string SearchContent { get; set; }
+
         public async Task OnGetAsync()
         {
-            TodoItem = await _context.TodoItems.ToListAsync();
+            var TodoList = from t in _context.TodoItems
+                           select t;
+
+            if(!string.IsNullOrEmpty(SearchContent))
+            {
+                TodoList = TodoList.Where(s => s.Content.Contains(SearchContent));
+            }
+
+            TodoItem = await TodoList.ToListAsync();
         }
     }
 }
